@@ -28,5 +28,8 @@
 
     <string name="menu_home">Home</string>
     <string name="menu_neworder">New Order</string>
-    <string name="menu_logout">Logout</string>
+
+    <string name="logout">Logout</string>
+    <string name="profile">Profile</string>
+    <string name="orders">Orders</string>
 </resources>

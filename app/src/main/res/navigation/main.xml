@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    app:startDestination="@+id/postsScreen">
+
+    <fragment
+        android:id="@+id/profileScreen"
+        android:name="mubstimor.android.quickorder.ui.main.profile.ProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile"/>
+
+    <fragment
+        android:id="@+id/postsScreen"
+        android:name="mubstimor.android.quickorder.ui.main.posts.PostsFragment"
+        android:label="@string/orders"
+        tools:layout="@layout/fragment_posts"/>
+
+</navigation>
