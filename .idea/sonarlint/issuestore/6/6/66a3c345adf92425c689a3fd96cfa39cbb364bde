@@ -1,0 +1,5 @@
+
+Usquid:S1155@">Use isEmpty() to check whether the collection is empty or not.(ÙØÅþ
+Ksquid:S1066A"/Merge this if statement with the enclosing one.(¢ ¥Žþÿÿÿÿ
+bsquid:CommentedOutCodeLine-"<This block of commented-out lines of code should be removed.(¿îÓ”
+Nsquid:S1068"2Remove this unused "sessionManager" private field.(ý›’ýÿÿÿÿ

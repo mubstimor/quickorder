@@ -6,7 +6,8 @@ import dagger.Binds;
 import dagger.Module;
 import dagger.multibindings.IntoMap;
 import mubstimor.android.quickorder.di.ViewModelKey;
-import mubstimor.android.quickorder.ui.main.posts.PostsViewModel;
+import mubstimor.android.quickorder.ui.main.orders.OrdersViewModel;
+import mubstimor.android.quickorder.ui.main.orders.details.DetailsViewModel;
 import mubstimor.android.quickorder.ui.main.profile.ProfileViewModel;
 
 @Module
@@ -19,6 +20,11 @@ public abstract class MainViewModelsModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(PostsViewModel.class)
-    public abstract ViewModel bindPostsViewModel(PostsViewModel viewModel);
+    @ViewModelKey(OrdersViewModel.class)
+    public abstract ViewModel bindPostsViewModel(OrdersViewModel viewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(DetailsViewModel.class)
+    public abstract ViewModel bindDetailsViewModel(DetailsViewModel viewModel);
 }

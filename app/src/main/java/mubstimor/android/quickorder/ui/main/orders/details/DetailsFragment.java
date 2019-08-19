@@ -1,4 +1,4 @@
-package mubstimor.android.quickorder.ui.main.posts;
+package mubstimor.android.quickorder.ui.main.orders.details;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -20,33 +20,34 @@ import javax.inject.Inject;
 import dagger.android.support.DaggerFragment;
 import mubstimor.android.quickorder.R;
 import mubstimor.android.quickorder.di.viewmodels.ViewModelProviderFactory;
-import mubstimor.android.quickorder.models.Post;
+import mubstimor.android.quickorder.models.OrderDetail;
 import mubstimor.android.quickorder.ui.main.Resource;
 import mubstimor.android.quickorder.util.VerticalSpacingItemDecoration;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
-public class PostsFragment extends DaggerFragment {
+public class DetailsFragment extends DaggerFragment implements DetailsRecyclerAdapter.OnOrderListener {
 
-    private PostsViewModel viewModel;
+    private DetailsViewModel viewModel;
     private RecyclerView recyclerView;
+    private DetailsRecyclerAdapter adapter;
 
-    @Inject
-    PostsRecyclerAdapter adapter;
+//    @Inject
+//    DetailsRecyclerAdapter adapter;
     @Inject
     ViewModelProviderFactory providerFactory;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_posts, container, false);
+        return inflater.inflate(R.layout.fragment_order_details, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        recyclerView = view.findViewById(R.id.recycler_view);
+        recyclerView = view.findViewById(R.id.details_recycler_view);
 
-        viewModel = ViewModelProviders.of(this, providerFactory).get(PostsViewModel.class);
+        viewModel = ViewModelProviders.of(this, providerFactory).get(DetailsViewModel.class);
 
         initRecyclerView();
         subscribeObservers();
@@ -54,9 +55,9 @@ public class PostsFragment extends DaggerFragment {
 
     private void subscribeObservers(){
         viewModel.observePosts().removeObservers(getViewLifecycleOwner());
-        viewModel.observePosts().observe(getViewLifecycleOwner(), new Observer<Resource<List<Post>>>() {
+        viewModel.observePosts().observe(getViewLifecycleOwner(), new Observer<Resource<List<OrderDetail>>>() {
             @Override
-            public void onChanged(Resource<List<Post>> listResource) {
+            public void onChanged(Resource<List<OrderDetail>> listResource) {
                 if(listResource != null){
                     switch (listResource.status){
                         case LOADING:{
@@ -64,8 +65,8 @@ public class PostsFragment extends DaggerFragment {
                             break;
                         }
                         case SUCCESS:{
-                            Log.d(TAG, "onChanged: got posts ....");
-                            adapter.setPosts(listResource.data);
+                            Log.d(TAG, "onChanged: got order details ....");
+                            adapter.setOrderDetails(listResource.data);
                             break;
                         }
                         case ERROR:{
@@ -82,6 +83,13 @@ public class PostsFragment extends DaggerFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         VerticalSpacingItemDecoration itemDecoration = new VerticalSpacingItemDecoration(15);
         recyclerView.addItemDecoration(itemDecoration);
+        adapter = new DetailsRecyclerAdapter(this);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onOrderClick(int position) {
+        Log.d("onClick", "onClick: Imp");
+
     }
 }

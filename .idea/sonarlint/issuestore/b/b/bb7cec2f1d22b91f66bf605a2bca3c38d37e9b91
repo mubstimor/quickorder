@@ -1,0 +1,11 @@
+
+Psquid:S1199Y"-Extract this nested code block into a method.(ü»Œûÿÿÿÿ8·÷ÖÈ-
+Esquid:S1068"'Remove this unused "TAG" private field.(Ö—ÈÚ8·÷ÖÈ-
+lsquid:MaximumInheritanceDepth"<This class has 8 parents which is greater than 5 authorized.(æƒ“Î8·÷ÖÈ-
+isquid:S1301M"KReplace this "switch" statement by "if" statements to increase readability.(¿›İ”8·÷ÖÈ-
+W"squid:SwitchLastCaseIsDefaultCheckM""Add a default case to this switch.(¿›İ”8·÷ÖÈ-
+nsquid:S13018"KReplace this "switch" statement by "if" statements to increase readability.(øå´¡ÿÿÿÿÿ8·÷ÖÈ-
+Psquid:S1199="-Extract this nested code block into a method.(°íäÿÿÿÿÿ8·÷ÖÈ-
+\"squid:SwitchLastCaseIsDefaultCheck8""Add a default case to this switch.(øå´¡ÿÿÿÿÿ8·÷ÖÈ-
+Psquid:S11999"-Extract this nested code block into a method.(»Óˆšıÿÿÿÿ8·÷ÖÈ-
+Ksquid:S1199N"-Extract this nested code block into a method.(ó¹Ê8·÷ÖÈ-

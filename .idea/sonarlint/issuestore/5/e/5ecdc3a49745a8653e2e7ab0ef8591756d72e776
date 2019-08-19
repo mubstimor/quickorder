@@ -1,0 +1,6 @@
+
+vsquid:UselessImportCheck"FRemove this unused import 'mubstimor.android.quickorder.models.Order'.(ËªËèÿÿÿÿÿ8³ž–«É-
+Bsquid:S1659G"+Declare "paymentStatus" on a separate line.(Ê‘úÐ
+_squid:UselessImportCheck"4Remove this unused import 'android.content.Context'.(©Ê‰è8Ý“¼ÔÉ-
+[squid:UselessImportCheck"0Remove this unused import 'javax.inject.Inject'.(ì–íÔ8”œ„ÔÉ-
+vsquid:UselessImportCheck"KRemove this unused import 'dagger.android.support.DaggerAppCompatActivity'.(®†ž“8Ñœ·ÔÉ-
