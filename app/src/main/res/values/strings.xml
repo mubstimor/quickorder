@@ -44,4 +44,5 @@
     <string name="action_2">Action 2</string>
     <string name="expanded_supporting">I\'m a thing. But, like most politicians,</string>
     <string name="order_details">Order Details</string>
+    <string name="no_data_available">No data available</string>
 </resources>

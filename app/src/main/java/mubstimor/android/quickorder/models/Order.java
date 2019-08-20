@@ -5,13 +5,13 @@ import com.google.gson.annotations.SerializedName;
 
 public class Order {
 
-//    @SerializedName("orderId")
-//    @Expose
-//    private int orderId;
+    @SerializedName("id")
+    @Expose
+    private int orderId;
 
     @SerializedName("registered_by")
     @Expose
-    private int id;
+    private int registeredBy;
 
     @SerializedName("table")
     @Expose
@@ -32,20 +32,29 @@ public class Order {
     public Order() {
     }
 
-    public Order(int id, String table, String prepStatus, String paymentStatus, String addedDate) {
-        this.id = id;
+    public Order(int orderId, int registeredBy, String table, String prepStatus, String paymentStatus, String addedDate) {
+        this.orderId = orderId;
+        this.registeredBy = registeredBy;
         this.table = table;
         this.prepStatus = prepStatus;
         this.paymentStatus = paymentStatus;
         this.addedDate = addedDate;
     }
 
-    public int getId() {
-        return id;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public int getRegisteredBy() {
+        return registeredBy;
+    }
+
+    public void setRegisteredBy(int registeredBy) {
+        this.registeredBy = registeredBy;
     }
 
     public String getTable() {

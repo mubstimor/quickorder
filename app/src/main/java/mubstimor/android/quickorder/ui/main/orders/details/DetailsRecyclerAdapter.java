@@ -1,6 +1,5 @@
 package mubstimor.android.quickorder.ui.main.orders.details;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,10 +7,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
@@ -19,11 +14,7 @@ import com.google.android.material.card.MaterialCardView;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
-import dagger.android.support.DaggerAppCompatActivity;
 import mubstimor.android.quickorder.R;
-import mubstimor.android.quickorder.models.Order;
 import mubstimor.android.quickorder.models.OrderDetail;
 
 public class DetailsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -60,14 +51,15 @@ public class DetailsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     public class PostViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView tableName, paymentStatus;
+        TextView mealName, quantity, accompaniment;
         MaterialCardView itemLayout;
         OnOrderListener onOrderListener;
 
         public PostViewHolder(@NonNull View itemView, OnOrderListener onOrderListener) {
             super(itemView);
-            tableName = itemView.findViewById(R.id.order_primary_text);
-            paymentStatus = itemView.findViewById(R.id.order_txtPayStatus);
+            mealName = itemView.findViewById(R.id.order_primary_text);
+            quantity = itemView.findViewById(R.id.order_txtPayStatus);
+            accompaniment = itemView.findViewById(R.id.order_condiment);
             itemLayout = itemView.findViewById(R.id.order_parent_layout);
             this.onOrderListener = onOrderListener;
 
@@ -75,9 +67,11 @@ public class DetailsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
 
         public void bind(OrderDetail order){
-            Log.d("order details", "bind: " + order.getMealId());
-            tableName.setText(Integer.toString(order.getMealId()));
-            paymentStatus.setText(Integer.toString(order.getQuantity()));
+            mealName.setText(Integer.toString(order.getMealId()));
+            quantity.setText(Integer.toString(order.getQuantity()));
+            String condiments = "(" + String.join(",", order.getAccompaniments()) + ")";
+            accompaniment.setText(condiments);
+
         }
 
         @Override

@@ -9,7 +9,7 @@ public class OrderDetail {
     @Expose
     private int mealId;
 
-    @SerializedName("accompaniments")
+    @SerializedName("meal_accompaniments")
     @Expose
     private String[] accompaniments;
 
