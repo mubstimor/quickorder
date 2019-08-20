@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,9 +29,13 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class DetailsFragment extends DaggerFragment implements DetailsRecyclerAdapter.OnOrderListener {
 
+    public static final String ORDERID = "orderId";
+
     private DetailsViewModel viewModel;
     private RecyclerView recyclerView;
     private DetailsRecyclerAdapter adapter;
+    TextView emptyView;
+    int orderId = -1;
 
 //    @Inject
 //    DetailsRecyclerAdapter adapter;
@@ -40,12 +45,21 @@ public class DetailsFragment extends DaggerFragment implements DetailsRecyclerAd
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.i("savedInstance", ""+ savedInstanceState);
+        Bundle bundle = this.getArguments();
+        orderId = bundle.getInt(ORDERID);
+//        Log.i("orderId", ""+ orderId);
+        if (savedInstanceState != null) {
+            orderId = bundle.getInt(ORDERID);
+        }
+//        orderId = Integer.parseInt(order_id);
         return inflater.inflate(R.layout.fragment_order_details, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         recyclerView = view.findViewById(R.id.details_recycler_view);
+        emptyView = view.findViewById(R.id.empty_view);
 
         viewModel = ViewModelProviders.of(this, providerFactory).get(DetailsViewModel.class);
 
@@ -54,8 +68,8 @@ public class DetailsFragment extends DaggerFragment implements DetailsRecyclerAd
     }
 
     private void subscribeObservers(){
-        viewModel.observePosts().removeObservers(getViewLifecycleOwner());
-        viewModel.observePosts().observe(getViewLifecycleOwner(), new Observer<Resource<List<OrderDetail>>>() {
+        viewModel.observePosts(orderId).removeObservers(getViewLifecycleOwner());
+        viewModel.observePosts(orderId).observe(getViewLifecycleOwner(), new Observer<Resource<List<OrderDetail>>>() {
             @Override
             public void onChanged(Resource<List<OrderDetail>> listResource) {
                 if(listResource != null){
@@ -66,7 +80,14 @@ public class DetailsFragment extends DaggerFragment implements DetailsRecyclerAd
                         }
                         case SUCCESS:{
                             Log.d(TAG, "onChanged: got order details ....");
-                            adapter.setOrderDetails(listResource.data);
+                            if(listResource.data.size() > 0){
+                                adapter.setOrderDetails(listResource.data);
+                                emptyView.setVisibility(View.GONE);
+                            } else {
+                                recyclerView.setVisibility(View.GONE);
+                                emptyView.setVisibility(View.VISIBLE);
+                            }
+
                             break;
                         }
                         case ERROR:{
@@ -90,6 +111,11 @@ public class DetailsFragment extends DaggerFragment implements DetailsRecyclerAd
     @Override
     public void onOrderClick(int position) {
         Log.d("onClick", "onClick: Imp");
+    }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(ORDERID, orderId);
     }
 }

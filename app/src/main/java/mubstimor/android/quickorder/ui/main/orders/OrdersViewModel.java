@@ -51,7 +51,7 @@ public class OrdersViewModel extends ViewModel {
                         public List<Order> apply(Throwable throwable) throws Exception {
                             Log.e(TAG, "apply: ", throwable);
                             Order order = new Order();
-                            order.setId(-1);
+                            order.setOrderId(-1);
                             ArrayList<Order> orders = new ArrayList<>();
                             orders.add(order);
                             return orders;
@@ -61,7 +61,7 @@ public class OrdersViewModel extends ViewModel {
                         @Override
                         public Resource<List<Order>> apply(List<Order> orders) throws Exception {
                             if(orders.size() > 0){
-                                if(orders.get(0).getId() == -1){
+                                if(orders.get(0).getOrderId() == -1){
                                     return Resource.error("Something went wrong", null);
                                 }
                             }

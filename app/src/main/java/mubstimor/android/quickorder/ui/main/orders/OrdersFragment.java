@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,6 +36,7 @@ public class OrdersFragment extends DaggerFragment implements OrdersRecyclerAdap
     private OrdersViewModel viewModel;
     private RecyclerView recyclerView;
     private OrdersRecyclerAdapter adapter;
+    TextView emptyView;
 
 //    @Inject
 //    OrdersRecyclerAdapter adapter;
@@ -51,6 +53,7 @@ public class OrdersFragment extends DaggerFragment implements OrdersRecyclerAdap
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         recyclerView = view.findViewById(R.id.recycler_view);
+        emptyView = view.findViewById(R.id.empty_view);
 
         viewModel = ViewModelProviders.of(this, providerFactory).get(OrdersViewModel.class);
 
@@ -72,6 +75,13 @@ public class OrdersFragment extends DaggerFragment implements OrdersRecyclerAdap
                         case SUCCESS:{
                             Log.d(TAG, "onChanged: got posts ....");
                             adapter.setOrders(listResource.data);
+                            if(listResource.data.size() > 0){
+                                adapter.setOrders(listResource.data);
+                                emptyView.setVisibility(View.GONE);
+                            } else {
+                                recyclerView.setVisibility(View.GONE);
+                                emptyView.setVisibility(View.VISIBLE);
+                            }
                             break;
                         }
                         case ERROR:{
@@ -94,13 +104,14 @@ public class OrdersFragment extends DaggerFragment implements OrdersRecyclerAdap
 
     @Override
     public void onOrderClick(int position, Order order) {
-        Log.d(TAG, "onOrderClick: order clicked " + order);
+        Log.d(TAG, "onOrderClick: order clicked " + order.getOrderId());
         DetailsFragment fragment = new DetailsFragment();
+        Bundle args = new Bundle();
+        args.putInt(DetailsFragment.ORDERID, order.getOrderId());
+        fragment.setArguments(args);
         FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.nav_host_fragment, fragment);
-//        transaction.replace(R.id.orderDetailsScreen, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
-//        Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.orderDetailsScreen);
     }
 }

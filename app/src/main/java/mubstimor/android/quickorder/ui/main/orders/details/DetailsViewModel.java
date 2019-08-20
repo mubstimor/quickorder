@@ -37,13 +37,13 @@ public class DetailsViewModel extends ViewModel {
         Log.d(TAG, "DetailsViewModel: viewmodel is working ...");
     }
 
-    public LiveData<Resource<List<OrderDetail>>> observePosts(){
+    public LiveData<Resource<List<OrderDetail>>> observePosts(int orderId){
         if(orderDetails == null){
             orderDetails = new MediatorLiveData<>();
             orderDetails.setValue(Resource.loading((List<OrderDetail>)null));
 
 //            String username = sessionManager.getAuthUser().getValue().data.getUsername();
-            int orderId = 1;
+//            int orderId = 1;
 
             final LiveData<Resource<List<OrderDetail>>> source = LiveDataReactiveStreams.fromPublisher(
                   mainApi.getOrderDetails(orderId)
