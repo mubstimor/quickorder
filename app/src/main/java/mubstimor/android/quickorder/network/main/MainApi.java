@@ -5,6 +5,7 @@ import java.util.List;
 import io.reactivex.Flowable;
 import mubstimor.android.quickorder.models.Order;
 import mubstimor.android.quickorder.models.OrderDetail;
+import mubstimor.android.quickorder.models.Table;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -18,4 +19,7 @@ public interface MainApi {
     Flowable<List<OrderDetail>> getOrderDetails(
             @Path("orderId") int orderId
     );
+
+    @GET("/api/v1/tables/")
+    Flowable<List<Table>> getTables();
 }

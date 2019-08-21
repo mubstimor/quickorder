@@ -1,0 +1,12 @@
+
+Isquid:S1199?"-Extract this nested code block into a method.(Šæð¾ùÿÿÿÿ
+Csquid:S1199D"-Extract this nested code block into a method.(çéà
+Dsquid:S1199K"-Extract this nested code block into a method.(Ö÷„”
+Dsquid:S1199Q"-Extract this nested code block into a method.(ƒÖ±Å
+Isquid:S1199m"-Extract this nested code block into a method.(Š öüøÿÿÿÿ
+gsquid:S1301l"KReplace this "switch" statement by "if" statements to increase readability.(×“¾ñùÿÿÿÿ
+isquid:UselessImportCheck"ERemove this unused import 'androidx.appcompat.app.AppCompatActivity'.(€¶£î
+Zsquid:UselessImportCheck"1Remove this unused import 'android.widget.Toast'.(©›ïÍúÿÿÿÿ
+jsquid:MaximumInheritanceDepth"<This class has 7 parents which is greater than 5 authorized.(’ó›Ýüÿÿÿÿ
+=squid:S1659"&Declare "password" on a separate line.(‡‰‹¨
+U"squid:SwitchLastCaseIsDefaultCheckl""Add a default case to this switch.(×“¾ñùÿÿÿÿ

@@ -1,4 +1,4 @@
-package mubstimor.android.quickorder.ui.main.orders.details;
+package mubstimor.android.quickorder.ui.main.orders.neworder;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -9,10 +9,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -21,50 +24,29 @@ import javax.inject.Inject;
 import dagger.android.support.DaggerFragment;
 import mubstimor.android.quickorder.R;
 import mubstimor.android.quickorder.di.viewmodels.ViewModelProviderFactory;
-import mubstimor.android.quickorder.models.OrderDetail;
+import mubstimor.android.quickorder.models.Table;
 import mubstimor.android.quickorder.ui.main.Resource;
+import mubstimor.android.quickorder.ui.main.orders.details.DetailsFragment;
 import mubstimor.android.quickorder.util.VerticalSpacingItemDecoration;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
-public class DetailsFragment extends DaggerFragment implements DetailsRecyclerAdapter.OnOrderListener {
+public class SelectTableFragment extends DaggerFragment implements TablesRecyclerAdapter.OnTableListener {
 
-    public static final String ORDERID = "orderId";
-
-    private DetailsViewModel viewModel;
+    private SelectTableViewModel viewModel;
     private RecyclerView recyclerView;
-    private DetailsRecyclerAdapter adapter;
+    private TablesRecyclerAdapter adapter;
     TextView emptyView;
-    int orderId = -1;
+    FloatingActionButton floatingActionButton;
 
-//    @Inject
-//    DetailsRecyclerAdapter adapter;
+
     @Inject
     ViewModelProviderFactory providerFactory;
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @NonNull Bundle savedInstanceState) {
-        Log.i("savedInstance", ""+ savedInstanceState);
-        orderId = getOrderIdFromBundle();
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_recycler, container, false);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-    }
-
-    private int getOrderIdFromBundle(){
-        Bundle args = getArguments();
-        Log.d(TAG, "onStart: args " + args);
-        int order_id = -1;
-        if(args != null){
-            order_id = args.getInt(ORDERID);
-            Log.d(TAG, "onStart: orderId " + orderId);
-        }
-        return order_id;
     }
 
     @Override
@@ -72,17 +54,19 @@ public class DetailsFragment extends DaggerFragment implements DetailsRecyclerAd
         recyclerView = view.findViewById(R.id.recycler_view);
         emptyView = view.findViewById(R.id.empty_view);
 
-        viewModel = ViewModelProviders.of(this, providerFactory).get(DetailsViewModel.class);
+        viewModel = ViewModelProviders.of(this, providerFactory).get(SelectTableViewModel.class);
+        floatingActionButton = view.findViewById(R.id.fab);
+        floatingActionButton.hide();
 
         initRecyclerView();
         subscribeObservers();
     }
 
     private void subscribeObservers(){
-        viewModel.observePosts(orderId).removeObservers(getViewLifecycleOwner());
-        viewModel.observePosts(orderId).observe(getViewLifecycleOwner(), new Observer<Resource<List<OrderDetail>>>() {
+        viewModel.observePosts().removeObservers(getViewLifecycleOwner());
+        viewModel.observePosts().observe(getViewLifecycleOwner(), new Observer<Resource<List<Table>>>() {
             @Override
-            public void onChanged(Resource<List<OrderDetail>> listResource) {
+            public void onChanged(Resource<List<Table>> listResource) {
                 if(listResource != null){
                     switch (listResource.status){
                         case LOADING:{
@@ -90,15 +74,15 @@ public class DetailsFragment extends DaggerFragment implements DetailsRecyclerAd
                             break;
                         }
                         case SUCCESS:{
-                            Log.d(TAG, "onChanged: got order details ....");
+                            Log.d(TAG, "onChanged: got tables ....");
+                            adapter.setOrders(listResource.data);
                             if(listResource.data.size() > 0){
-                                adapter.setOrderDetails(listResource.data);
+                                adapter.setOrders(listResource.data);
                                 emptyView.setVisibility(View.GONE);
                             } else {
                                 recyclerView.setVisibility(View.GONE);
                                 emptyView.setVisibility(View.VISIBLE);
                             }
-
                             break;
                         }
                         case ERROR:{
@@ -115,27 +99,22 @@ public class DetailsFragment extends DaggerFragment implements DetailsRecyclerAd
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         VerticalSpacingItemDecoration itemDecoration = new VerticalSpacingItemDecoration(15);
         recyclerView.addItemDecoration(itemDecoration);
-        adapter = new DetailsRecyclerAdapter(this);
+        adapter = new TablesRecyclerAdapter(this);
         recyclerView.setAdapter(adapter);
     }
 
     @Override
-    public void onOrderClick(int position) {
-        Log.d("onClick", "onClick: Imp");
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt(ORDERID, orderId);
-    }
-
-    @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-        if(savedInstanceState != null){
-            orderId = savedInstanceState.getInt(ORDERID);
-        }
+    public void onTableClick(int position, Table table) {
+        Log.d(TAG, "onTableClick: order clicked " + table.getTableId());
+//        DetailsFragment fragment = new DetailsFragment();
+//        final Bundle args = new Bundle();
+//        args.putInt(DetailsFragment.ORDERID, table.getTableId());
+//        fragment.setArguments(args);
+//        fragment.setRetainInstance(true);
+//        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+//        transaction.replace(R.id.nav_host_fragment, fragment);
+//        transaction.addToBackStack(null);
+//        transaction.commit();
     }
 
 }

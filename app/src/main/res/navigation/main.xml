@@ -15,12 +15,18 @@
         android:id="@+id/postsScreen"
         android:name="mubstimor.android.quickorder.ui.main.orders.OrdersFragment"
         android:label="@string/orders"
-        tools:layout="@layout/fragment_orders"/>
+        tools:layout="@layout/fragment_recycler"/>
 
     <fragment
         android:id="@+id/orderDetailsScreen"
         android:name="mubstimor.android.quickorder.ui.main.orders.details.DetailsFragment"
         android:label="@string/order_details"
-        tools:layout="@layout/fragment_order_details"/>
+        tools:layout="@layout/fragment_recycler"/>
+
+    <fragment
+        android:id="@+id/selectTableScreen"
+        android:name="mubstimor.android.quickorder.ui.main.orders.neworder.SelectTableFragment"
+        android:label="@string/select_table"
+        tools:layout="@layout/fragment_recycler"/>
 
 </navigation>
