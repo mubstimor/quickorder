@@ -1,4 +1,4 @@
-package mubstimor.android.quickorder.ui.main.orders.neworder;
+package mubstimor.android.quickorder.ui.main.orders.menu;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,19 +23,17 @@ import javax.inject.Inject;
 import dagger.android.support.DaggerFragment;
 import mubstimor.android.quickorder.R;
 import mubstimor.android.quickorder.di.viewmodels.ViewModelProviderFactory;
-import mubstimor.android.quickorder.models.Table;
+import mubstimor.android.quickorder.models.Meal;
 import mubstimor.android.quickorder.ui.main.Resource;
-import mubstimor.android.quickorder.ui.main.orders.details.DetailsFragment;
-import mubstimor.android.quickorder.ui.main.orders.menu.SelectMenuFragment;
 import mubstimor.android.quickorder.util.VerticalSpacingItemDecoration;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
-public class SelectTableFragment extends DaggerFragment implements TablesRecyclerAdapter.OnTableListener {
+public class SelectMenuFragment extends DaggerFragment implements MenuRecyclerAdapter.OnMealListener {
 
-    private SelectTableViewModel viewModel;
+    private SelectMenuViewModel viewModel;
     private RecyclerView recyclerView;
-    private TablesRecyclerAdapter adapter;
+    private MenuRecyclerAdapter adapter;
     TextView emptyView;
     FloatingActionButton floatingActionButton;
 
@@ -55,7 +52,7 @@ public class SelectTableFragment extends DaggerFragment implements TablesRecycle
         recyclerView = view.findViewById(R.id.recycler_view);
         emptyView = view.findViewById(R.id.empty_view);
 
-        viewModel = ViewModelProviders.of(this, providerFactory).get(SelectTableViewModel.class);
+        viewModel = ViewModelProviders.of(this, providerFactory).get(SelectMenuViewModel.class);
         floatingActionButton = view.findViewById(R.id.fab);
         floatingActionButton.hide();
 
@@ -65,9 +62,9 @@ public class SelectTableFragment extends DaggerFragment implements TablesRecycle
 
     private void subscribeObservers(){
         viewModel.observePosts().removeObservers(getViewLifecycleOwner());
-        viewModel.observePosts().observe(getViewLifecycleOwner(), new Observer<Resource<List<Table>>>() {
+        viewModel.observePosts().observe(getViewLifecycleOwner(), new Observer<Resource<List<Meal>>>() {
             @Override
-            public void onChanged(Resource<List<Table>> listResource) {
+            public void onChanged(Resource<List<Meal>> listResource) {
                 if(listResource != null){
                     switch (listResource.status){
                         case LOADING:{
@@ -100,22 +97,22 @@ public class SelectTableFragment extends DaggerFragment implements TablesRecycle
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         VerticalSpacingItemDecoration itemDecoration = new VerticalSpacingItemDecoration(15);
         recyclerView.addItemDecoration(itemDecoration);
-        adapter = new TablesRecyclerAdapter(this);
+        adapter = new MenuRecyclerAdapter(this);
         recyclerView.setAdapter(adapter);
     }
 
     @Override
-    public void onTableClick(int position, Table table) {
-        Log.d(TAG, "onTableClick: table clicked " + table.getTableId());
-        SelectMenuFragment fragment = new SelectMenuFragment();
-        final Bundle args = new Bundle();
-        args.putInt(DetailsFragment.ORDERID, table.getTableId());
-        fragment.setArguments(args);
-        fragment.setRetainInstance(true);
-        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.nav_host_fragment, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+    public void onTableClick(int position, Meal meal) {
+        Log.d(TAG, "onTableClick: order clicked " + meal.getName());
+//        DetailsFragment fragment = new DetailsFragment();
+//        final Bundle args = new Bundle();
+//        args.putInt(DetailsFragment.ORDERID, table.getTableId());
+//        fragment.setArguments(args);
+//        fragment.setRetainInstance(true);
+//        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+//        transaction.replace(R.id.nav_host_fragment, fragment);
+//        transaction.addToBackStack(null);
+//        transaction.commit();
     }
 
 }

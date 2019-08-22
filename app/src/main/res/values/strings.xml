@@ -46,4 +46,5 @@
     <string name="order_details">Order Details</string>
     <string name="select_table">Select Table</string>
     <string name="no_data_available">No data available</string>
+    <string name="select_menu">Select Menu Item</string>
 </resources>
