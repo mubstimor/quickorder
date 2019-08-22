@@ -2,6 +2,7 @@ package mubstimor.android.quickorder.di.main;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
+import mubstimor.android.quickorder.ui.main.orders.menu.SelectMenuFragment;
 import mubstimor.android.quickorder.ui.main.orders.neworder.SelectTableFragment;
 import mubstimor.android.quickorder.ui.main.orders.OrdersFragment;
 import mubstimor.android.quickorder.ui.main.orders.details.DetailsFragment;
@@ -21,4 +22,7 @@ public abstract class MainFragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract SelectTableFragment contributeTableFragment();
+
+    @ContributesAndroidInjector
+    abstract SelectMenuFragment contributeMenuFragment();
 }

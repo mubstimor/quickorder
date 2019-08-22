@@ -29,4 +29,10 @@
         android:label="@string/select_table"
         tools:layout="@layout/fragment_recycler"/>
 
+    <fragment
+        android:id="@+id/selectMenuScreen"
+        android:name="mubstimor.android.quickorder.ui.main.orders.menu.SelectMenuFragment"
+        android:label="@string/select_menu"
+        tools:layout="@layout/fragment_recycler"/>
+
 </navigation>
