@@ -1,4 +1,9 @@
 
-Dsquid:S1199G"-Extract this nested code block into a method.(Ö÷„”
-Dsquid:S1199B"-Extract this nested code block into a method.(ç—Ð
-Isquid:S1199>"-Extract this nested code block into a method.(Šæð¾ùÿÿÿÿ
+Ksquid:S1199Q"-Extract this nested code block into a method.(ç—Ð8ÂŽÍõÊ-
+asquid:S1155S">Use isEmpty() to check whether the collection is empty or not.(ÆÒý•ûÿÿÿÿ8ÂŽÍõÊ-
+nsquid:CommentedOutCodeLine7"<This block of commented-out lines of code should be removed.(ú˜ÎÍþÿÿÿÿ8ÂŽÍõÊ-
+Psquid:S1199M"-Extract this nested code block into a method.(Šæð¾ùÿÿÿÿ8ÂŽÍõÊ-
+nsquid:CommentedOutCodeLine)"<This block of commented-out lines of code should be removed.(ÜÂÙ²øÿÿÿÿ8ÂŽÍõÊ-
+Ksquid:S1199]"-Extract this nested code block into a method.(Ö÷„”8ÂŽÍõÊ-
+ˆsquid:S1845&"eRename field "orderId" to prevent any misunderstanding/clash with field "ORDERID" defined on line 32.(¿úü™þÿÿÿÿ8ÂŽÍõÊ-
+nsquid:CommentedOutCodeLine3"<This block of commented-out lines of code should be removed.(û¡Áýÿÿÿÿ8ÂŽÍõÊ-

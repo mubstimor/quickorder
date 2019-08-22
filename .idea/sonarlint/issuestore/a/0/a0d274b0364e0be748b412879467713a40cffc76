@@ -1,3 +1,5 @@
 
-Xsquid:S1118":Add a private constructor to hide the implicit public one.(ÊÄ»¨8™âƒÔÉ-
+isquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(²‘¾½8®Ü½ÒÊ-
+Xsquid:S1118":Add a private constructor to hide the implicit public one.(ÊÄ»¨8®Ü½ÒÊ-
 _squid:UselessImportCheck"4Remove this unused import 'android.content.Context'.(©Ê‰è8™âƒÔÉ-
+nsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Øêåêûÿÿÿÿ8¥™ÅÒÊ-

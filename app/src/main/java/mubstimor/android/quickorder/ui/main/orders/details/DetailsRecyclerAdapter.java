@@ -30,13 +30,13 @@ public class DetailsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_order_detail_list_item, parent, false);
-        return new PostViewHolder(view, onOrderListener);
+        return new DetailViewHolder(view, onOrderListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         final OrderDetail selectedOrderDetail = ordersDetails.get(position);
-        ((PostViewHolder)holder).bind(selectedOrderDetail);
+        ((DetailViewHolder)holder).bind(selectedOrderDetail);
     }
 
     @Override
@@ -49,13 +49,13 @@ public class DetailsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         notifyDataSetChanged();
     }
 
-    public class PostViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class DetailViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView mealName, quantity, accompaniment;
         MaterialCardView itemLayout;
         OnOrderListener onOrderListener;
 
-        public PostViewHolder(@NonNull View itemView, OnOrderListener onOrderListener) {
+        public DetailViewHolder(@NonNull View itemView, OnOrderListener onOrderListener) {
             super(itemView);
             mealName = itemView.findViewById(R.id.order_primary_text);
             quantity = itemView.findViewById(R.id.order_txtPayStatus);

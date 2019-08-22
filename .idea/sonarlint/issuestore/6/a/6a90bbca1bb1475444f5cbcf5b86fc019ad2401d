@@ -1,6 +1,6 @@
 
-Nsquid:S1068"2Remove this unused "sessionManager" private field.(ı›’ıÿÿÿÿ
-asquid:S1155?">Use isEmpty() to check whether the collection is empty or not.(ö”•ùÿÿÿÿ8¤²ªÉ-
+Psquid:S1066"/Merge this if statement with the enclosing one.(€ˆÚÏşÿÿÿÿ8¤²ªÉ-
 bsquid:CommentedOutCodeLine-"<This block of commented-out lines of code should be removed.(¿îÓ”
-Msquid:S1066@"/Merge this if statement with the enclosing one.(‹ïÿÁ8¤²ªÉ-
-hsquid:HiddenFieldCheck7":Rename "orders" which hides the field declared at line 31.(—íË«ûÿÿÿÿ8¤²ªÉ-
+_squid:S1155">Use isEmpty() to check whether the collection is empty or not.(ö”•ùÿÿÿÿ8¤²ªÉ-
+fsquid:HiddenFieldCheck":Rename "orders" which hides the field declared at line 31.(—íË«ûÿÿÿÿ8¤²ªÉ-
+Nsquid:S1068"2Remove this unused "sessionManager" private field.(ı›’ıÿÿÿÿ

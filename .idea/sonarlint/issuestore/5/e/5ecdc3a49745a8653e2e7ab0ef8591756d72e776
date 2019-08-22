@@ -1,6 +1,3 @@
 
-vsquid:UselessImportCheck"FRemove this unused import 'mubstimor.android.quickorder.models.Order'.(ËªËèÿÿÿÿÿ8³–«É-
-Bsquid:S1659G"+Declare "paymentStatus" on a separate line.(Ê‘úĞ
-_squid:UselessImportCheck"4Remove this unused import 'android.content.Context'.(©Ê‰è8İ“¼ÔÉ-
-[squid:UselessImportCheck"0Remove this unused import 'javax.inject.Inject'.(ì–íÔ8”œ„ÔÉ-
-vsquid:UselessImportCheck"KRemove this unused import 'dagger.android.support.DaggerAppCompatActivity'.(®†“8Ñœ·ÔÉ-
+Dsquid:S16596"&Declare "quantity" on a separate line.(üˆ¨¼8ŸÍõÊ-
+Isquid:S16596"+Declare "accompaniment" on a separate line.(üˆ¨¼8ŸÍõÊ-

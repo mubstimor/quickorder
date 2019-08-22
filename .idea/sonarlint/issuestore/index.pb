@@ -47,3 +47,9 @@ s
 Capp/src/main/java/mubstimor/android/quickorder/di/AppComponent.java,b/f/bf1598acac2837227b7cf8fc79e1494d21db78f2
 p
 @app/src/main/java/mubstimor/android/quickorder/di/AppModule.java,f/6/f67d5bc9339ad074dd092ede309f5b13892c841a
+x
+Happ/src/main/java/mubstimor/android/quickorder/ui/auth/AuthActivity.java,0/c/0ced5d7808950cc2f246fafb1e6c2b5e944a31d7
+s
+Capp/src/main/java/mubstimor/android/quickorder/di/ViewModelKey.java,d/8/d8ad6ae8917d904fb2823e18dad5ae9250f326c0
+}
+Mapp/src/main/java/mubstimor/android/quickorder/di/ViewModelFactoryModule.java,b/6/b6211997282eba62f640af68010b6c7948d4857e

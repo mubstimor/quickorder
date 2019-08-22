@@ -9,13 +9,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ import mubstimor.android.quickorder.R;
 import mubstimor.android.quickorder.di.viewmodels.ViewModelProviderFactory;
 import mubstimor.android.quickorder.models.Order;
 import mubstimor.android.quickorder.ui.main.Resource;
+import mubstimor.android.quickorder.ui.main.orders.neworder.SelectTableFragment;
 import mubstimor.android.quickorder.ui.main.orders.details.DetailsFragment;
 import mubstimor.android.quickorder.util.VerticalSpacingItemDecoration;
 
@@ -37,6 +39,7 @@ public class OrdersFragment extends DaggerFragment implements OrdersRecyclerAdap
     private RecyclerView recyclerView;
     private OrdersRecyclerAdapter adapter;
     TextView emptyView;
+    FloatingActionButton floatingActionButton;
 
 //    @Inject
 //    OrdersRecyclerAdapter adapter;
@@ -47,7 +50,7 @@ public class OrdersFragment extends DaggerFragment implements OrdersRecyclerAdap
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_orders, container, false);
+        return inflater.inflate(R.layout.fragment_recycler, container, false);
     }
 
     @Override
@@ -56,6 +59,13 @@ public class OrdersFragment extends DaggerFragment implements OrdersRecyclerAdap
         emptyView = view.findViewById(R.id.empty_view);
 
         viewModel = ViewModelProviders.of(this, providerFactory).get(OrdersViewModel.class);
+        floatingActionButton = view.findViewById(R.id.fab);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addNewOrder();
+            }
+        });
 
         initRecyclerView();
         subscribeObservers();
@@ -104,14 +114,25 @@ public class OrdersFragment extends DaggerFragment implements OrdersRecyclerAdap
 
     @Override
     public void onOrderClick(int position, Order order) {
-        Log.d(TAG, "onOrderClick: order clicked " + order.getOrderId());
+        Log.d(TAG, "onTableClick: order clicked " + order.getOrderId());
         DetailsFragment fragment = new DetailsFragment();
-        Bundle args = new Bundle();
+        final Bundle args = new Bundle();
         args.putInt(DetailsFragment.ORDERID, order.getOrderId());
         fragment.setArguments(args);
+        fragment.setRetainInstance(true);
+        fragmentTransaction(fragment);
+    }
+
+    private void fragmentTransaction(Fragment fragment) {
         FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.nav_host_fragment, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+    public void addNewOrder(){
+        SelectTableFragment tableFragment = new SelectTableFragment();
+        fragmentTransaction(tableFragment);
+    }
+
 }
