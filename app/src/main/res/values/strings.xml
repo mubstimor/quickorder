@@ -50,4 +50,5 @@
     <string name="select_condiment">Select Condiment</string>
     <string name="reset_btn">Reset</string>
     <string name="add_condiment">Add to Meal</string>
+    <string name="confirm_order">Confirm Order</string>
 </resources>

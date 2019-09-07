@@ -1,6 +1,5 @@
 package mubstimor.android.quickorder.ui.auth;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -12,15 +11,17 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import javax.inject.Inject;
 
 import dagger.android.support.DaggerAppCompatActivity;
 import mubstimor.android.quickorder.R;
+import mubstimor.android.quickorder.SessionManager;
 import mubstimor.android.quickorder.di.viewmodels.ViewModelProviderFactory;
 import mubstimor.android.quickorder.models.User;
 import mubstimor.android.quickorder.ui.main.MainActivity;
+import mubstimor.android.quickorder.util.Constants;
+import mubstimor.android.quickorder.util.PreferencesManager;
 
 public class AuthActivity extends DaggerAppCompatActivity implements View.OnClickListener {
 
@@ -37,6 +38,8 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
     @Inject
     ViewModelProviderFactory providerFactory;
 
+    PreferencesManager preferencesManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,8 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
         findViewById(R.id.btnLogin).setOnClickListener(this);
 
         viewModel = ViewModelProviders.of(this, providerFactory).get(AuthViewModel.class);
+
+        preferencesManager = new PreferencesManager(getApplicationContext());
 
         subscribeObservers();
     }
@@ -68,7 +73,8 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
                         case AUTHENTICATED:{
                             showProgressBar(false);
                             Log.d(TAG, "onChanged: LOGIN SUCCESS:  " + userAuthResource.data.getEmail());
-                            onLoginSuccess();
+                            User user = userAuthResource.data;
+                            onLoginSuccess(user);
                             break;
                         }
 
@@ -89,7 +95,10 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
 
     }
 
-    private void onLoginSuccess(){
+    private void onLoginSuccess(User user){
+        preferencesManager.setValue(Constants.KEY_USEREMAIL, user.getEmail());
+        preferencesManager.setValue(Constants.KEY_USERNAME, user.getUsername());
+        preferencesManager.setValue(Constants.KEY_USERTOKEN, user.getToken());
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();

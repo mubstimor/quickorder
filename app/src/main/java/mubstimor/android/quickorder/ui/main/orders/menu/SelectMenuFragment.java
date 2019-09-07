@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
@@ -36,6 +35,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class SelectMenuFragment extends DaggerFragment implements MenuRecyclerAdapter.OnMealListener {
 
     public static final String TABLEID = "tableId";
+    public static final String ORDERID = "orderId";
 
     private SelectMenuViewModel viewModel;
     private RecyclerView recyclerView;
@@ -45,6 +45,7 @@ public class SelectMenuFragment extends DaggerFragment implements MenuRecyclerAd
     NavController navController;
     Bundle bundle;
     int tableId = -1;
+    int orderId = -1;
 
 
     @Inject
@@ -53,7 +54,7 @@ public class SelectMenuFragment extends DaggerFragment implements MenuRecyclerAd
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        tableId = getTableIdFromBundle();
+        getDataFromBundle();
         return inflater.inflate(R.layout.fragment_recycler, container, false);
     }
 
@@ -72,15 +73,14 @@ public class SelectMenuFragment extends DaggerFragment implements MenuRecyclerAd
         subscribeObservers();
     }
 
-    private int getTableIdFromBundle(){
+    private void getDataFromBundle(){
         Bundle args = getArguments();
         Log.d(TAG, "onStart: args " + args);
-        int table_id = -1;
         if(args != null){
-            table_id = args.getInt(TABLEID);
+            tableId = args.getInt(TABLEID);
+            orderId = args.getInt(ORDERID);
             Log.d(TAG, "onStart: orderId " + tableId);
         }
-        return table_id;
     }
 
     private void subscribeObservers(){
@@ -127,8 +127,10 @@ public class SelectMenuFragment extends DaggerFragment implements MenuRecyclerAd
     @Override
     public void onTableClick(int position, Meal meal) {
         Log.d(TAG, "oncondiment: order clicked " + meal.getName());
-        bundle.putInt(SelectMenuFragment.TABLEID, tableId);
+        bundle.putInt(TABLEID, tableId);
+        bundle.putInt(ORDERID, orderId);
         bundle.putString(CondimentFragment.MEALNAME, meal.getName());
+        bundle.putInt(CondimentFragment.MEALID, meal.getMealId());
         navController.navigate(R.id.action_selectMenuScreen_to_selectCondimentScreen, bundle);
     }
 

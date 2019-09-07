@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
@@ -26,10 +28,15 @@ import javax.inject.Inject;
 
 import dagger.android.support.DaggerFragment;
 import mubstimor.android.quickorder.R;
+import mubstimor.android.quickorder.SessionManager;
 import mubstimor.android.quickorder.di.viewmodels.ViewModelProviderFactory;
 import mubstimor.android.quickorder.models.Order;
+import mubstimor.android.quickorder.models.User;
+import mubstimor.android.quickorder.ui.auth.AuthResource;
 import mubstimor.android.quickorder.ui.main.Resource;
 import mubstimor.android.quickorder.ui.main.orders.details.DetailsFragment;
+import mubstimor.android.quickorder.util.Constants;
+import mubstimor.android.quickorder.util.PreferencesManager;
 import mubstimor.android.quickorder.util.VerticalSpacingItemDecoration;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
@@ -47,6 +54,11 @@ public class OrdersFragment extends DaggerFragment implements OrdersRecyclerAdap
     @Inject
     ViewModelProviderFactory providerFactory;
 
+    PreferencesManager preferencesManager;
+
+    @Inject
+    SessionManager sessionManager;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,6 +71,7 @@ public class OrdersFragment extends DaggerFragment implements OrdersRecyclerAdap
         bundle = new Bundle();
         recyclerView = view.findViewById(R.id.recycler_view);
         emptyView = view.findViewById(R.id.empty_view);
+        preferencesManager = new PreferencesManager(getContext());
 
         viewModel = ViewModelProviders.of(this, providerFactory).get(OrdersViewModel.class);
         floatingActionButton = view.findViewById(R.id.fab);
@@ -71,6 +84,9 @@ public class OrdersFragment extends DaggerFragment implements OrdersRecyclerAdap
 
         initRecyclerView();
         subscribeObservers();
+        Log.i("usertoken", preferencesManager.getValue(Constants.KEY_USERTOKEN));
+        LiveData<AuthResource<User>> user = sessionManager.getAuthUser();
+        Log.i("usertoken from session", user.getValue().data.getToken());
     }
 
     private void subscribeObservers(){

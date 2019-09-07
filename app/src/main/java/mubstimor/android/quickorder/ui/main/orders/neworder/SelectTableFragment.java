@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
@@ -18,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -26,9 +26,9 @@ import javax.inject.Inject;
 import dagger.android.support.DaggerFragment;
 import mubstimor.android.quickorder.R;
 import mubstimor.android.quickorder.di.viewmodels.ViewModelProviderFactory;
+import mubstimor.android.quickorder.models.Order;
 import mubstimor.android.quickorder.models.Table;
 import mubstimor.android.quickorder.ui.main.Resource;
-import mubstimor.android.quickorder.ui.main.orders.details.DetailsFragment;
 import mubstimor.android.quickorder.ui.main.orders.menu.SelectMenuFragment;
 import mubstimor.android.quickorder.util.VerticalSpacingItemDecoration;
 
@@ -43,6 +43,7 @@ public class SelectTableFragment extends DaggerFragment implements TablesRecycle
     FloatingActionButton floatingActionButton;
     NavController navController;
     Bundle bundle;
+    int orderId = -1;
 
 
     @Inject
@@ -67,11 +68,12 @@ public class SelectTableFragment extends DaggerFragment implements TablesRecycle
 
         initRecyclerView();
         subscribeObservers();
+//        subscribeOrderObserver();
     }
 
     private void subscribeObservers(){
-        viewModel.observePosts().removeObservers(getViewLifecycleOwner());
-        viewModel.observePosts().observe(getViewLifecycleOwner(), new Observer<Resource<List<Table>>>() {
+        viewModel.observeTables().removeObservers(getViewLifecycleOwner());
+        viewModel.observeTables().observe(getViewLifecycleOwner(), new Observer<Resource<List<Table>>>() {
             @Override
             public void onChanged(Resource<List<Table>> listResource) {
                 if(listResource != null){
@@ -102,6 +104,34 @@ public class SelectTableFragment extends DaggerFragment implements TablesRecycle
         });
     }
 
+    private void subscribeOrderObserver(final int tableId){
+        viewModel.observeCreateOrder(tableId).removeObservers(getViewLifecycleOwner());
+        viewModel.observeCreateOrder(tableId).observe(getViewLifecycleOwner(), new Observer<Resource<Order>>() {
+            @Override
+            public void onChanged(Resource<Order> resource) {
+                if(resource != null){
+                    switch (resource.status){
+                        case LOADING:{
+                            Log.d(TAG, "onChanged: LOADING ....");
+                            break;
+                        }
+                        case SUCCESS:{
+                            Log.d(TAG, "onChanged: got tables ....");
+                            Log.d(TAG, "onChanged: Order Created:  " + resource.data.getOrderId());
+                            orderId = resource.data.getOrderId();
+                            onOrderCreatedSuccess(tableId, orderId);
+                            break;
+                        }
+                        case ERROR:{
+                            Log.e(TAG, "onChanged: ERROR .... " + resource.message );
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+    }
+
     private void initRecyclerView(){
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         VerticalSpacingItemDecoration itemDecoration = new VerticalSpacingItemDecoration(15);
@@ -113,8 +143,18 @@ public class SelectTableFragment extends DaggerFragment implements TablesRecycle
     @Override
     public void onTableClick(int position, Table table) {
         Log.d(TAG, "onTableClick: table clicked " + table.getTableId());
-        bundle.putInt(SelectMenuFragment.TABLEID, table.getTableId());
-        navController.navigate(R.id.action_selectTableScreen_to_selectMenuScreen, bundle);
+        subscribeOrderObserver(table.getTableId());
+//        Log.i("orderId now", ""+ orderId);
+    }
+
+    public void onOrderCreatedSuccess(int tableId, int orderId){
+        if(orderId != -1){
+            bundle.putInt(SelectMenuFragment.ORDERID, orderId);
+            bundle.putInt(SelectMenuFragment.TABLEID, tableId);
+            navController.navigate(R.id.action_selectTableScreen_to_selectMenuScreen, bundle);
+        } else {
+            Snackbar.make(getView(), "Unable to proceed", Snackbar.LENGTH_SHORT).show();
+        }
     }
 
 }

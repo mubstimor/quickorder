@@ -1,6 +1,6 @@
 
-Ksquid:S1199U"-Extract this nested code block into a method.(ç—Ð8’¿í¿Ë-
-Ksquid:S1199a"-Extract this nested code block into a method.(Ö÷„”8’¿í¿Ë-
-asquid:S1155X">Use isEmpty() to check whether the collection is empty or not.(ÆÒý•ûÿÿÿÿ8’¿í¿Ë-
-isquid:CommentedOutCodeLine-"<This block of commented-out lines of code should be removed.(’Ï“º8’¿í¿Ë-
-Psquid:S1199Q"-Extract this nested code block into a method.(Šæð¾ùÿÿÿÿ8’¿í¿Ë-
+Ksquid:S1199W"-Extract this nested code block into a method.(ç—Ð8’¿í¿Ë-
+dsquid:UnusedPrivateMethod|"8Remove this unused private "fragmentTransaction" method.(Ê‘Ÿ¨8ØÝ¦ÞÐ-
+Psquid:S1199S"-Extract this nested code block into a method.(Šæð¾ùÿÿÿÿ8’¿í¿Ë-
+Ksquid:S1199c"-Extract this nested code block into a method.(Ö÷„”8’¿í¿Ë-
+asquid:S1155Z">Use isEmpty() to check whether the collection is empty or not.(ÆÒý•ûÿÿÿÿ8’¿í¿Ë-
