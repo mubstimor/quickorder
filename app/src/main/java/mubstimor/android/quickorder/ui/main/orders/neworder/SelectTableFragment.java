@@ -12,6 +12,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,6 +41,8 @@ public class SelectTableFragment extends DaggerFragment implements TablesRecycle
     private TablesRecyclerAdapter adapter;
     TextView emptyView;
     FloatingActionButton floatingActionButton;
+    NavController navController;
+    Bundle bundle;
 
 
     @Inject
@@ -52,6 +56,8 @@ public class SelectTableFragment extends DaggerFragment implements TablesRecycle
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+        bundle = new Bundle();
         recyclerView = view.findViewById(R.id.recycler_view);
         emptyView = view.findViewById(R.id.empty_view);
 
@@ -107,15 +113,8 @@ public class SelectTableFragment extends DaggerFragment implements TablesRecycle
     @Override
     public void onTableClick(int position, Table table) {
         Log.d(TAG, "onTableClick: table clicked " + table.getTableId());
-        SelectMenuFragment fragment = new SelectMenuFragment();
-        final Bundle args = new Bundle();
-        args.putInt(DetailsFragment.ORDERID, table.getTableId());
-        fragment.setArguments(args);
-        fragment.setRetainInstance(true);
-        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.nav_host_fragment, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        bundle.putInt(SelectMenuFragment.TABLEID, table.getTableId());
+        navController.navigate(R.id.action_selectTableScreen_to_selectMenuScreen, bundle);
     }
 
 }

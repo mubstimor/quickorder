@@ -1,9 +1,9 @@
 
-Ksquid:S1199Q"-Extract this nested code block into a method.(ç—Ð8ÂŽÍõÊ-
-asquid:S1155S">Use isEmpty() to check whether the collection is empty or not.(ÆÒý•ûÿÿÿÿ8ÂŽÍõÊ-
-nsquid:CommentedOutCodeLine7"<This block of commented-out lines of code should be removed.(ú˜ÎÍþÿÿÿÿ8ÂŽÍõÊ-
-Psquid:S1199M"-Extract this nested code block into a method.(Šæð¾ùÿÿÿÿ8ÂŽÍõÊ-
-nsquid:CommentedOutCodeLine)"<This block of commented-out lines of code should be removed.(ÜÂÙ²øÿÿÿÿ8ÂŽÍõÊ-
-Ksquid:S1199]"-Extract this nested code block into a method.(Ö÷„”8ÂŽÍõÊ-
 ˆsquid:S1845&"eRename field "orderId" to prevent any misunderstanding/clash with field "ORDERID" defined on line 32.(¿úü™þÿÿÿÿ8ÂŽÍõÊ-
-nsquid:CommentedOutCodeLine3"<This block of commented-out lines of code should be removed.(û¡Áýÿÿÿÿ8ÂŽÍõÊ-
+Isquid:S1199"-Extract this nested code block into a method.(ç—Ð8ÂŽÍõÊ-
+nsquid:CommentedOutCodeLine)"<This block of commented-out lines of code should be removed.(ÜÂÙ²øÿÿÿÿ8ÂŽÍõÊ-
+Isquid:S1199"-Extract this nested code block into a method.(Ö÷„”8ÂŽÍõÊ-
+_squid:S1155">Use isEmpty() to check whether the collection is empty or not.(ÆÒý•ûÿÿÿÿ8ÂŽÍõÊ-
+Isquid:S1185"(Remove this method to simply inherit it.(µ‚µõýÿÿÿÿ8¿©Ú Ë-
+Nsquid:S1199"-Extract this nested code block into a method.(Šæð¾ùÿÿÿÿ8ÂŽÍõÊ-
+ssquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(èÖ¼šúÿÿÿÿ8’ËÝ Ë-

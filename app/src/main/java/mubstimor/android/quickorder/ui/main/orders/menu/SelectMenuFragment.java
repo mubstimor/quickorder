@@ -9,8 +9,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,17 +28,23 @@ import mubstimor.android.quickorder.R;
 import mubstimor.android.quickorder.di.viewmodels.ViewModelProviderFactory;
 import mubstimor.android.quickorder.models.Meal;
 import mubstimor.android.quickorder.ui.main.Resource;
+import mubstimor.android.quickorder.ui.main.orders.condiments.CondimentFragment;
 import mubstimor.android.quickorder.util.VerticalSpacingItemDecoration;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class SelectMenuFragment extends DaggerFragment implements MenuRecyclerAdapter.OnMealListener {
 
+    public static final String TABLEID = "tableId";
+
     private SelectMenuViewModel viewModel;
     private RecyclerView recyclerView;
     private MenuRecyclerAdapter adapter;
     TextView emptyView;
     FloatingActionButton floatingActionButton;
+    NavController navController;
+    Bundle bundle;
+    int tableId = -1;
 
 
     @Inject
@@ -44,11 +53,14 @@ public class SelectMenuFragment extends DaggerFragment implements MenuRecyclerAd
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        tableId = getTableIdFromBundle();
         return inflater.inflate(R.layout.fragment_recycler, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+        bundle = new Bundle();
         recyclerView = view.findViewById(R.id.recycler_view);
         emptyView = view.findViewById(R.id.empty_view);
 
@@ -58,6 +70,17 @@ public class SelectMenuFragment extends DaggerFragment implements MenuRecyclerAd
 
         initRecyclerView();
         subscribeObservers();
+    }
+
+    private int getTableIdFromBundle(){
+        Bundle args = getArguments();
+        Log.d(TAG, "onStart: args " + args);
+        int table_id = -1;
+        if(args != null){
+            table_id = args.getInt(TABLEID);
+            Log.d(TAG, "onStart: orderId " + tableId);
+        }
+        return table_id;
     }
 
     private void subscribeObservers(){
@@ -103,16 +126,10 @@ public class SelectMenuFragment extends DaggerFragment implements MenuRecyclerAd
 
     @Override
     public void onTableClick(int position, Meal meal) {
-        Log.d(TAG, "onTableClick: order clicked " + meal.getName());
-//        DetailsFragment fragment = new DetailsFragment();
-//        final Bundle args = new Bundle();
-//        args.putInt(DetailsFragment.ORDERID, table.getTableId());
-//        fragment.setArguments(args);
-//        fragment.setRetainInstance(true);
-//        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-//        transaction.replace(R.id.nav_host_fragment, fragment);
-//        transaction.addToBackStack(null);
-//        transaction.commit();
+        Log.d(TAG, "oncondiment: order clicked " + meal.getName());
+        bundle.putInt(SelectMenuFragment.TABLEID, tableId);
+        bundle.putString(CondimentFragment.MEALNAME, meal.getName());
+        navController.navigate(R.id.action_selectMenuScreen_to_selectCondimentScreen, bundle);
     }
 
 }
