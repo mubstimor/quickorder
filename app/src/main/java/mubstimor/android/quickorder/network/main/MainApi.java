@@ -3,6 +3,7 @@ package mubstimor.android.quickorder.network.main;
 import java.util.List;
 
 import io.reactivex.Flowable;
+import mubstimor.android.quickorder.models.Condiment;
 import mubstimor.android.quickorder.models.Meal;
 import mubstimor.android.quickorder.models.Order;
 import mubstimor.android.quickorder.models.OrderDetail;
@@ -25,4 +26,7 @@ public interface MainApi {
 
     @GET("/api/v1/meals/")
     Flowable<List<Meal>> getMeals();
+
+    @GET("/api/v1/condiments/")
+    Flowable<List<Condiment>> getCondiments();
 }

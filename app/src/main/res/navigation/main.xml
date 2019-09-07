@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    app:startDestination="@+id/postsScreen">
+    app:startDestination="@+id/ordersScreen">
 
     <fragment
         android:id="@+id/profileScreen"
@@ -12,10 +12,17 @@
         tools:layout="@layout/fragment_profile"/>
 
     <fragment
-        android:id="@+id/postsScreen"
+        android:id="@+id/ordersScreen"
         android:name="mubstimor.android.quickorder.ui.main.orders.OrdersFragment"
         android:label="@string/orders"
-        tools:layout="@layout/fragment_recycler"/>
+        tools:layout="@layout/fragment_recycler">
+        <action
+            android:id="@+id/action_ordersScreen_to_orderDetailsScreen"
+            app:destination="@id/orderDetailsScreen" />
+        <action
+            android:id="@+id/action_ordersScreen_to_selectTableScreen"
+            app:destination="@id/selectTableScreen" />
+    </fragment>
 
     <fragment
         android:id="@+id/orderDetailsScreen"
@@ -27,12 +34,26 @@
         android:id="@+id/selectTableScreen"
         android:name="mubstimor.android.quickorder.ui.main.orders.neworder.SelectTableFragment"
         android:label="@string/select_table"
-        tools:layout="@layout/fragment_recycler"/>
+        tools:layout="@layout/fragment_recycler">
+        <action
+            android:id="@+id/action_selectTableScreen_to_selectMenuScreen"
+            app:destination="@id/selectMenuScreen" />
+    </fragment>
 
     <fragment
         android:id="@+id/selectMenuScreen"
         android:name="mubstimor.android.quickorder.ui.main.orders.menu.SelectMenuFragment"
         android:label="@string/select_menu"
+        tools:layout="@layout/fragment_recycler">
+        <action
+            android:id="@+id/action_selectMenuScreen_to_selectCondimentScreen"
+            app:destination="@id/selectCondimentScreen" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/selectCondimentScreen"
+        android:name="mubstimor.android.quickorder.ui.main.orders.condiments.CondimentFragment"
+        android:label="@string/select_condiment"
         tools:layout="@layout/fragment_recycler"/>
 
 </navigation>

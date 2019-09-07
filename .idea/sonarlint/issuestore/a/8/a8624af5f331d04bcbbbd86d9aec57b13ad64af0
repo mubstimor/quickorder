@@ -1,8 +1,6 @@
 
-Psquid:S1199G"-Extract this nested code block into a method.(Šæğ¾ùÿÿÿÿ8´ÍõÊ-
-Ksquid:S1199K"-Extract this nested code block into a method.(ç—Ğ8´ÍõÊ-
-Ksquid:S1199W"-Extract this nested code block into a method.(Ö÷„”8´ÍõÊ-
-rsquid:UselessImportCheck"BRemove this unused import 'androidx.fragment.app.FragmentManager'.(¯­ë‹ıÿÿÿÿ8´ÍõÊ-
-ksquid:UselessImportCheck";Remove this unused import 'androidx.navigation.Navigation'.(ÄíÚÀÿÿÿÿÿ8´ÍõÊ-
-asquid:S1155N">Use isEmpty() to check whether the collection is empty or not.(ÆÒı•ûÿÿÿÿ8´ÍõÊ-
-isquid:CommentedOutCodeLine*"<This block of commented-out lines of code should be removed.(’Ï“º8´ÍõÊ-
+Ksquid:S1199U"-Extract this nested code block into a method.(ç—Ğ8’¿í¿Ë-
+Ksquid:S1199a"-Extract this nested code block into a method.(Ö÷„”8’¿í¿Ë-
+asquid:S1155X">Use isEmpty() to check whether the collection is empty or not.(ÆÒı•ûÿÿÿÿ8’¿í¿Ë-
+isquid:CommentedOutCodeLine-"<This block of commented-out lines of code should be removed.(’Ï“º8’¿í¿Ë-
+Psquid:S1199Q"-Extract this nested code block into a method.(Šæğ¾ùÿÿÿÿ8’¿í¿Ë-
