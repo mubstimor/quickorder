@@ -34,7 +34,7 @@ public class CondimentViewModel extends ViewModel {
     public CondimentViewModel(SessionManager sessionManager, MainApi mainApi) {
         this.sessionManager = sessionManager;
         this.mainApi = mainApi;
-        Log.d(TAG, "CondimentViewModel: viewmodel is working ...");
+        Log.d(TAG, "ConfirmViewModel: viewmodel is working ...");
     }
 
     public LiveData<Resource<List<Condiment>>> observePosts(){

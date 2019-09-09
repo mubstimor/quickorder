@@ -8,6 +8,7 @@ import dagger.multibindings.IntoMap;
 import mubstimor.android.quickorder.di.ViewModelKey;
 import mubstimor.android.quickorder.ui.main.orders.OrdersViewModel;
 import mubstimor.android.quickorder.ui.main.orders.condiments.CondimentViewModel;
+import mubstimor.android.quickorder.ui.main.orders.confirm.ConfirmViewModel;
 import mubstimor.android.quickorder.ui.main.orders.details.DetailsViewModel;
 import mubstimor.android.quickorder.ui.main.orders.menu.SelectMenuViewModel;
 import mubstimor.android.quickorder.ui.main.orders.neworder.SelectTableViewModel;
@@ -45,4 +46,9 @@ public abstract class MainViewModelsModule {
     @IntoMap
     @ViewModelKey(CondimentViewModel.class)
     public abstract ViewModel bindCondimentViewModel(CondimentViewModel viewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ConfirmViewModel.class)
+    public abstract ViewModel bindConfirmViewModel(ConfirmViewModel viewModel);
 }

@@ -54,6 +54,16 @@
         android:id="@+id/selectCondimentScreen"
         android:name="mubstimor.android.quickorder.ui.main.orders.condiments.CondimentFragment"
         android:label="@string/select_condiment"
-        tools:layout="@layout/fragment_recycler"/>
+        tools:layout="@layout/fragment_recycler">
+        <action
+            android:id="@+id/action_selectCondimentScreen_to_confirmOrderScreen"
+            app:destination="@id/confirmOrderScreen" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/confirmOrderScreen"
+        android:name="mubstimor.android.quickorder.ui.main.orders.confirm.ConfirmFragment"
+        android:label="@string/confirm_order"
+        tools:layout="@layout/fragment_confirm_order"/>
 
 </navigation>

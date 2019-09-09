@@ -76,3 +76,7 @@ Zapp/src/main/java/mubstimor/android/quickorder/ui/main/orders/menu/SelectMenuFr
 fapp/src/main/java/mubstimor/android/quickorder/ui/main/orders/condiments/CondimentRecyclerAdapter.java,e/9/e9d1aa5ca9601a672609a86f33f180924718c3f0
 è
 _app/src/main/java/mubstimor/android/quickorder/ui/main/orders/condiments/CondimentFragment.java,b/9/b940bc234f7483b7842b84f279f0c495fdc99b78
+ã
+[app/src/main/java/mubstimor/android/quickorder/ui/main/orders/confirm/ConfirmViewModel.java,a/2/a21c9fb1ccdb09f1ac3a3c2c8bbcdf70c48b9fa3
+ä
+Zapp/src/main/java/mubstimor/android/quickorder/ui/main/orders/confirm/ConfirmFragment.java,8/d/8dfd8179a030b8c342ae981ecb204da0a11ca0a0

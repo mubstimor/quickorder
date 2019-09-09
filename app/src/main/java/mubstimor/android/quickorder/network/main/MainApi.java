@@ -8,7 +8,9 @@ import mubstimor.android.quickorder.models.Meal;
 import mubstimor.android.quickorder.models.Order;
 import mubstimor.android.quickorder.models.OrderDetail;
 import mubstimor.android.quickorder.models.Table;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface MainApi {
@@ -29,4 +31,13 @@ public interface MainApi {
 
     @GET("/api/v1/condiments/")
     Flowable<List<Condiment>> getCondiments();
+
+    @POST("/api/v1/orders/")
+    Flowable<Order> createOrder(@Body Order order);
+
+    @POST("/api/v1/orders/{orderId}/details/")
+    Flowable<OrderDetail> createOrderDetail(
+            @Path("orderId") int orderId,
+            @Body OrderDetail orderDetail
+    );
 }

@@ -38,12 +38,10 @@ public class SelectTableViewModel extends ViewModel {
         Log.d(TAG, "OrdersViewModel: viewmodel is working ...");
     }
 
-    public LiveData<Resource<List<Table>>> observePosts(){
+    public LiveData<Resource<List<Table>>> observeTables(){
         if(tables == null){
             tables = new MediatorLiveData<>();
             tables.setValue(Resource.loading((List<Table>)null));
-
-//            String username = sessionManager.getAuthUser().getValue().data.getUsername();
 
             final LiveData<Resource<List<Table>>> source = LiveDataReactiveStreams.fromPublisher(
                   mainApi.getTables()
@@ -80,6 +78,34 @@ public class SelectTableViewModel extends ViewModel {
             });
         }
         return tables;
+    }
+
+
+    public LiveData<Resource<Order>> observeCreateOrder(int tableId){
+        Order order = new Order();
+        order.setTable(Integer.toString(tableId));
+        order.setPrepStatus("Started");
+        return LiveDataReactiveStreams.fromPublisher(
+                mainApi.createOrder(order)
+                        .onErrorReturn(new Function<Throwable, Order>() {
+                            @Override
+                            public Order apply(Throwable throwable) throws Exception {
+                                Order errorOrder = new Order();
+                                errorOrder.setTable("");
+                                return errorOrder;
+                            }
+                        })
+                        .map(new Function<Order, Resource<Order>>() {
+                            @Override
+                            public Resource<Order> apply(Order order) throws Exception {
+                                if(order.getTable().length() < 1){
+                                    return Resource.error("Something went wrong", null);
+                                }
+                                return Resource.success(order);
+                            }
+                        })
+                        .subscribeOn(Schedulers.io())
+        );
     }
 
 }

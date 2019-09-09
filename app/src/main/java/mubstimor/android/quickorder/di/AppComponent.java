@@ -10,6 +10,7 @@ import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
 import mubstimor.android.quickorder.BaseApplication;
 import mubstimor.android.quickorder.SessionManager;
+import mubstimor.android.quickorder.util.PreferencesManager;
 
 @Singleton
 @Component(
@@ -25,10 +26,13 @@ public interface AppComponent extends AndroidInjector<BaseApplication> {
     SessionManager sessionManager();
 
     @Component.Builder
-    interface Builder{
+    interface Builder {
 
         @BindsInstance
         Builder application(Application application);
+
+        @BindsInstance
+        Builder application(String authToken);
 
         AppComponent build();
     }
