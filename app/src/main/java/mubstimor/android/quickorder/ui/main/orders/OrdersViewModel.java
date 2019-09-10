@@ -22,34 +22,25 @@ import mubstimor.android.quickorder.ui.main.Resource;
 
 public class OrdersViewModel extends ViewModel {
 
-    private static final String TAG = "OrdersViewModel";
-
-    // inject
-    private final SessionManager sessionManager;
     private final MainApi mainApi;
 
     private MediatorLiveData<Resource<List<Order>>> orders;
 
     @Inject
     public OrdersViewModel(SessionManager sessionManager, MainApi mainApi) {
-        this.sessionManager = sessionManager;
         this.mainApi = mainApi;
-        Log.d(TAG, "OrdersViewModel: viewmodel is working ...");
     }
 
-    public LiveData<Resource<List<Order>>> observePosts(){
+    public LiveData<Resource<List<Order>>> observeOrders(){
         if(orders == null){
             orders = new MediatorLiveData<>();
             orders.setValue(Resource.loading((List<Order>)null));
-
-//            String username = sessionManager.getAuthUser().getValue().data.getUsername();
 
             final LiveData<Resource<List<Order>>> source = LiveDataReactiveStreams.fromPublisher(
                   mainApi.getUnpaidOrders()
                     .onErrorReturn(new Function<Throwable, List<Order>>() {
                         @Override
                         public List<Order> apply(Throwable throwable) throws Exception {
-                            Log.e(TAG, "apply: ", throwable);
                             Order order = new Order();
                             order.setOrderId(-1);
                             ArrayList<Order> orders = new ArrayList<>();

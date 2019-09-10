@@ -13,6 +13,7 @@ import dagger.android.support.DaggerAppCompatActivity;
 import mubstimor.android.quickorder.models.User;
 import mubstimor.android.quickorder.ui.auth.AuthActivity;
 import mubstimor.android.quickorder.ui.auth.AuthResource;
+import mubstimor.android.quickorder.util.PreferencesManager;
 
 public abstract class BaseActivity extends DaggerAppCompatActivity {
     private static final String TAG = "BaseActivity";
@@ -20,9 +21,12 @@ public abstract class BaseActivity extends DaggerAppCompatActivity {
     @Inject
     public SessionManager sessionManager;
 
+    PreferencesManager preferencesManager;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        preferencesManager = new PreferencesManager(this);
         subscribeObservers();
 
     }
@@ -59,6 +63,7 @@ public abstract class BaseActivity extends DaggerAppCompatActivity {
     }
 
     private void navLoginScreen(){
+        preferencesManager.clear();
         Intent intent = new Intent(this, AuthActivity.class);
         startActivity(intent);
         finish();
