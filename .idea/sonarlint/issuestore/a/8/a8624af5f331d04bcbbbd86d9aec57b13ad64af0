@@ -1,6 +1,7 @@
 
-Ksquid:S1199W"-Extract this nested code block into a method.(ç—Ğ8’¿í¿Ë-
-dsquid:UnusedPrivateMethod|"8Remove this unused private "fragmentTransaction" method.(Ê‘Ÿ¨8Øİ¦ŞĞ-
-Psquid:S1199S"-Extract this nested code block into a method.(Šæğ¾ùÿÿÿÿ8’¿í¿Ë-
-Ksquid:S1199c"-Extract this nested code block into a method.(Ö÷„”8’¿í¿Ë-
-asquid:S1155Z">Use isEmpty() to check whether the collection is empty or not.(ÆÒı•ûÿÿÿÿ8’¿í¿Ë-
+asquid:S1155j">Use isEmpty() to check whether the collection is empty or not.(ÆÒı•ûÿÿÿÿ8û ÊªÑ-
+Psquid:S1199c"-Extract this nested code block into a method.(Šæğ¾ùÿÿÿÿ8’¿í¿Ë-
+Ksquid:S1199g"-Extract this nested code block into a method.(ç—Ğ8’¿í¿Ë-
+Ksquid:S1199s"-Extract this nested code block into a method.(Ö÷„”8’¿í¿Ë-
+psquid:UselessImportCheck"@Remove this unused import 'androidx.lifecycle.MediatorLiveData'.(ªŠ¿¡ÿÿÿÿÿ8´¿ØªÑ-
+esquid:UnusedPrivateMethodŒ"8Remove this unused private "fragmentTransaction" method.(Ê‘Ÿ¨8Øİ¦ŞĞ-

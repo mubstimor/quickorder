@@ -64,6 +64,10 @@
         android:id="@+id/confirmOrderScreen"
         android:name="mubstimor.android.quickorder.ui.main.orders.confirm.ConfirmFragment"
         android:label="@string/confirm_order"
-        tools:layout="@layout/fragment_confirm_order"/>
+        tools:layout="@layout/fragment_confirm_order">
+        <action
+            android:id="@+id/action_confirmOrderScreen_to_selectMenuScreen"
+            app:destination="@id/selectMenuScreen" />
+    </fragment>
 
 </navigation>

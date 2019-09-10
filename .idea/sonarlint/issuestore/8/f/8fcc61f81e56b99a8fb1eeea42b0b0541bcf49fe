@@ -1,9 +1,9 @@
 
-nsquid:CommentedOutCodeLine)"<This block of commented-out lines of code should be removed.(ÜÂÙ²øÿÿÿÿ8ÂÍõÊ-
-Ksquid:S1199\"-Extract this nested code block into a method.(ç—Ğ8ÂÍõÊ-
-usquid:S00117>"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(èÖ¼šúÿÿÿÿ8’Ëİ Ë-
-asquid:S1155^">Use isEmpty() to check whether the collection is empty or not.(ÆÒı•ûÿÿÿÿ8ÂÍõÊ-
-Ksquid:S1199h"-Extract this nested code block into a method.(Ö÷„”8ÂÍõÊ-
 ˆsquid:S1845&"eRename field "orderId" to prevent any misunderstanding/clash with field "ORDERID" defined on line 32.(¿úü™şÿÿÿÿ8ÂÍõÊ-
-Ksquid:S11856"(Remove this method to simply inherit it.(µ‚µõıÿÿÿÿ8¿©Ú Ë-
 Psquid:S1199X"-Extract this nested code block into a method.(Šæğ¾ùÿÿÿÿ8ÂÍõÊ-
+usquid:S00117>"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(èÖ¼šúÿÿÿÿ8’Ëİ Ë-
+Ksquid:S1199\"-Extract this nested code block into a method.(ç—Ğ8ÂÍõÊ-
+Ksquid:S11856"(Remove this method to simply inherit it.(µ‚µõıÿÿÿÿ8¿©Ú Ë-
+nsquid:CommentedOutCodeLine)"<This block of commented-out lines of code should be removed.(ÜÂÙ²øÿÿÿÿ8ÂÍõÊ-
+Ksquid:S1199h"-Extract this nested code block into a method.(Ö÷„”8ÂÍõÊ-
+asquid:S1155^">Use isEmpty() to check whether the collection is empty or not.(ÆÒı•ûÿÿÿÿ8ÂÍõÊ-

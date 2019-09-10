@@ -79,6 +79,7 @@ public class SelectMenuFragment extends DaggerFragment implements MenuRecyclerAd
         if(args != null){
             tableId = args.getInt(TABLEID);
             orderId = args.getInt(ORDERID);
+            Log.i("getting--back", orderId + " - " + tableId);
             Log.d(TAG, "onStart: orderId " + tableId);
         }
     }
