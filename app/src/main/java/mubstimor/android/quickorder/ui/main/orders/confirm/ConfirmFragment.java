@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -39,6 +41,9 @@ public class ConfirmFragment extends DaggerFragment {
 
     private ConfirmViewModel viewModel;
     private RecyclerView recyclerView;
+    NavController navController;
+    Bundle bundle;
+
     TextView mealTxt;
     TextView accompanimentTxt;
     TextView orderQuantityTxt;
@@ -47,6 +52,7 @@ public class ConfirmFragment extends DaggerFragment {
     Button btnDecrement;
     Button btnConfirmOrder;
     Button btnReset;
+    Button btnAddMore;
 
     int tableId = -1;
     int mealId = -1;
@@ -68,7 +74,8 @@ public class ConfirmFragment extends DaggerFragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
+        navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+        bundle = new Bundle();
         viewModel = ViewModelProviders.of(this, providerFactory).get(ConfirmViewModel.class);
         mealTxt = view.findViewById(R.id.order_primary_text);
         accompanimentTxt = view.findViewById(R.id.order_condiment);
@@ -79,6 +86,7 @@ public class ConfirmFragment extends DaggerFragment {
         btnDecrement = view.findViewById(R.id.btnDecrement);
         btnConfirmOrder = view.findViewById(R.id.btnConfirm);
         btnReset = view.findViewById(R.id.btnReset);
+        btnAddMore = view.findViewById(R.id.btnAddMore);
 
         mealTxt.setText(mealName);
         accompanimentTxt.setText(accompaniment);
@@ -119,6 +127,16 @@ public class ConfirmFragment extends DaggerFragment {
                 quantity = 1;
                 selectedQuantity.setText(Integer.toString(quantity));
                 btnConfirmOrder.setEnabled(true);
+            }
+        });
+
+        btnAddMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bundle.putInt(SelectMenuFragment.ORDERID, orderId);
+                bundle.putInt(SelectMenuFragment.TABLEID, tableId);
+                Log.i("sending--back", orderId + " - " + tableId);
+                navController.navigate(R.id.action_confirmOrderScreen_to_selectMenuScreen, bundle);
             }
         });
 

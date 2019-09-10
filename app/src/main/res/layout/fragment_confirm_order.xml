@@ -52,6 +52,14 @@
                 android:text="@string/reset_btn" />
 
             <Button
+                android:id="@+id/btnAddMore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#55AC21"
+                android:text="@string/add_more" />
+
+            <Button
                 android:id="@+id/btnConfirm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -128,8 +128,8 @@ public class CondimentFragment extends DaggerFragment implements CondimentRecycl
     public void onTableClick(int position, Condiment condiment) {
         Log.d(TAG, "onTableClick: order clicked " + condiment.getName());
         bundle.putString(ConfirmFragment.CONDIMENTNAME, condiment.getName());
-        bundle.putInt(SelectMenuFragment.TABLEID, tableId);
         bundle.putInt(SelectMenuFragment.ORDERID, orderId);
+        bundle.putInt(SelectMenuFragment.TABLEID, tableId);
         bundle.putInt(CondimentFragment.MEALID, mealId);
         bundle.putString(CondimentFragment.MEALNAME, mealName);
         navController.navigate(R.id.action_selectCondimentScreen_to_confirmOrderScreen, bundle);
