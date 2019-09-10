@@ -11,8 +11,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -23,6 +27,7 @@ import mubstimor.android.quickorder.R;
 import mubstimor.android.quickorder.di.viewmodels.ViewModelProviderFactory;
 import mubstimor.android.quickorder.models.OrderDetail;
 import mubstimor.android.quickorder.ui.main.Resource;
+import mubstimor.android.quickorder.ui.main.orders.menu.SelectMenuFragment;
 import mubstimor.android.quickorder.util.VerticalSpacingItemDecoration;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
@@ -34,8 +39,12 @@ public class DetailsFragment extends DaggerFragment implements DetailsRecyclerAd
     private DetailsViewModel viewModel;
     private RecyclerView recyclerView;
     private DetailsRecyclerAdapter adapter;
+    NavController navController;
+    Bundle bundle;
     TextView emptyView;
     int orderId = -1;
+    int tableId = -1;
+    FloatingActionButton floatingActionButton;
 
 //    @Inject
 //    DetailsRecyclerAdapter adapter;
@@ -46,7 +55,7 @@ public class DetailsFragment extends DaggerFragment implements DetailsRecyclerAd
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @NonNull Bundle savedInstanceState) {
         Log.i("savedInstance", ""+ savedInstanceState);
-        orderId = getOrderIdFromBundle();
+        getDataFromBundle();
         return inflater.inflate(R.layout.fragment_recycler, container, false);
     }
 
@@ -56,26 +65,38 @@ public class DetailsFragment extends DaggerFragment implements DetailsRecyclerAd
 
     }
 
-    private int getOrderIdFromBundle(){
+    private void getDataFromBundle(){
         Bundle args = getArguments();
         Log.d(TAG, "onStart: args " + args);
-        int order_id = -1;
         if(args != null){
-            order_id = args.getInt(ORDERID);
+            orderId = args.getInt(ORDERID);
+            tableId = args.getInt(SelectMenuFragment.TABLEID);
             Log.d(TAG, "onStart: orderId " + orderId);
         }
-        return order_id;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+        bundle = new Bundle();
         recyclerView = view.findViewById(R.id.recycler_view);
         emptyView = view.findViewById(R.id.empty_view);
+        floatingActionButton = view.findViewById(R.id.fab);
 
         viewModel = ViewModelProviders.of(this, providerFactory).get(DetailsViewModel.class);
 
         initRecyclerView();
         subscribeObservers();
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bundle.putInt(SelectMenuFragment.ORDERID, orderId);
+                bundle.putInt(SelectMenuFragment.TABLEID, tableId);
+                Log.i("sending--to-menu", orderId + " - " + tableId);
+                navController.navigate(R.id.action_orderDetailsScreen_to_selectMenuScreen, bundle);
+            }
+        });
     }
 
     private void subscribeObservers(){
@@ -128,6 +149,7 @@ public class DetailsFragment extends DaggerFragment implements DetailsRecyclerAd
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(ORDERID, orderId);
+        outState.putInt(SelectMenuFragment.TABLEID, tableId);
     }
 
     @Override
@@ -135,6 +157,7 @@ public class DetailsFragment extends DaggerFragment implements DetailsRecyclerAd
         super.onViewStateRestored(savedInstanceState);
         if(savedInstanceState != null){
             orderId = savedInstanceState.getInt(ORDERID);
+            tableId = savedInstanceState.getInt(SelectMenuFragment.TABLEID);
         }
     }
 

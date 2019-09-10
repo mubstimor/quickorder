@@ -83,7 +83,7 @@ public class SelectTableViewModel extends ViewModel {
 
     public LiveData<Resource<Order>> observeCreateOrder(int tableId){
         Order order = new Order();
-        order.setTable(Integer.toString(tableId));
+        order.setTable(tableId);
         order.setPrepStatus("Started");
         return LiveDataReactiveStreams.fromPublisher(
                 mainApi.createOrder(order)
@@ -91,14 +91,14 @@ public class SelectTableViewModel extends ViewModel {
                             @Override
                             public Order apply(Throwable throwable) throws Exception {
                                 Order errorOrder = new Order();
-                                errorOrder.setTable("");
+                                errorOrder.setTable(-1);
                                 return errorOrder;
                             }
                         })
                         .map(new Function<Order, Resource<Order>>() {
                             @Override
                             public Resource<Order> apply(Order order) throws Exception {
-                                if(order.getTable().length() < 1){
+                                if(order.getTable() == -1){
                                     return Resource.error("Something went wrong", null);
                                 }
                                 return Resource.success(order);

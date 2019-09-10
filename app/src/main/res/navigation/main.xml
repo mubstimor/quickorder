@@ -28,7 +28,11 @@
         android:id="@+id/orderDetailsScreen"
         android:name="mubstimor.android.quickorder.ui.main.orders.details.DetailsFragment"
         android:label="@string/order_details"
-        tools:layout="@layout/fragment_recycler"/>
+        tools:layout="@layout/fragment_recycler">
+        <action
+            android:id="@+id/action_orderDetailsScreen_to_selectMenuScreen"
+            app:destination="@id/selectMenuScreen" />
+    </fragment>
 
     <fragment
         android:id="@+id/selectTableScreen"
