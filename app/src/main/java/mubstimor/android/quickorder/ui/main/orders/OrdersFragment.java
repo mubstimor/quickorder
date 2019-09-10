@@ -35,6 +35,7 @@ import mubstimor.android.quickorder.models.User;
 import mubstimor.android.quickorder.ui.auth.AuthResource;
 import mubstimor.android.quickorder.ui.main.Resource;
 import mubstimor.android.quickorder.ui.main.orders.details.DetailsFragment;
+import mubstimor.android.quickorder.ui.main.orders.menu.SelectMenuFragment;
 import mubstimor.android.quickorder.util.Constants;
 import mubstimor.android.quickorder.util.PreferencesManager;
 import mubstimor.android.quickorder.util.VerticalSpacingItemDecoration;
@@ -134,6 +135,7 @@ public class OrdersFragment extends DaggerFragment implements OrdersRecyclerAdap
     public void onOrderClick(int position, final Order order) {
         Log.d(TAG, "onTableClick: order clicked " + order.getOrderId());
         bundle.putInt(DetailsFragment.ORDERID, order.getOrderId());
+        bundle.putInt(SelectMenuFragment.TABLEID, order.getTable());
         navController.navigate(R.id.action_ordersScreen_to_orderDetailsScreen, bundle);
     }
 

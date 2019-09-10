@@ -66,7 +66,7 @@ public class OrdersRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
 
         public void bind(Order order){
-            tableName.setText(order.getTable());
+            tableName.setText(Integer.toString(order.getTable()));
             paymentStatus.setText(order.getPaymentStatus());
         }
 

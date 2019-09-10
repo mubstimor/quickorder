@@ -15,7 +15,7 @@ public class Order {
 
     @SerializedName("table")
     @Expose
-    private String table;
+    private int table;
 
     @SerializedName("prep_status")
     @Expose
@@ -32,7 +32,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(int orderId, int registeredBy, String table, String prepStatus, String paymentStatus, String addedDate) {
+    public Order(int orderId, int registeredBy, int table, String prepStatus, String paymentStatus, String addedDate) {
         this.orderId = orderId;
         this.registeredBy = registeredBy;
         this.table = table;
@@ -57,11 +57,11 @@ public class Order {
         this.registeredBy = registeredBy;
     }
 
-    public String getTable() {
+    public int getTable() {
         return table;
     }
 
-    public void setTable(String table) {
+    public void setTable(int table) {
         this.table = table;
     }
 
