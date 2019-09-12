@@ -72,10 +72,7 @@ public class OrdersRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         @Override
         public void onClick(View v) {
-
             onOrderListener.onOrderClick(getAdapterPosition(), orders.get(getAdapterPosition()) );
-            Log.d("orderclick", "onClick: orderclicked " + orders.get(getAdapterPosition()) );
-
         }
     }
 

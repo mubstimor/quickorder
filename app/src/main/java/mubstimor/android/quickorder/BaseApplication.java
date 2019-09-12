@@ -1,11 +1,5 @@
 package mubstimor.android.quickorder;
 
-import android.content.Context;
-
-import javax.inject.Inject;
-
-import dagger.Binds;
-import dagger.Provides;
 import dagger.android.AndroidInjector;
 import dagger.android.support.DaggerApplication;
 import mubstimor.android.quickorder.di.DaggerAppComponent;

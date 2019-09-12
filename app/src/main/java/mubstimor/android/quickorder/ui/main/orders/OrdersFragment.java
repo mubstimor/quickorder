@@ -9,10 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
@@ -40,9 +37,10 @@ import mubstimor.android.quickorder.util.Constants;
 import mubstimor.android.quickorder.util.PreferencesManager;
 import mubstimor.android.quickorder.util.VerticalSpacingItemDecoration;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class OrdersFragment extends DaggerFragment implements OrdersRecyclerAdapter.OnOrderListener {
+
+    private static final String TAG = "OrdersFragment";
 
     private OrdersViewModel viewModel;
     private RecyclerView recyclerView;
@@ -91,18 +89,16 @@ public class OrdersFragment extends DaggerFragment implements OrdersRecyclerAdap
     }
 
     private void subscribeObservers(){
-        viewModel.observePosts().removeObservers(getViewLifecycleOwner());
-        viewModel.observePosts().observe(getViewLifecycleOwner(), new Observer<Resource<List<Order>>>() {
+        viewModel.observeOrders().removeObservers(getViewLifecycleOwner());
+        viewModel.observeOrders().observe(getViewLifecycleOwner(), new Observer<Resource<List<Order>>>() {
             @Override
             public void onChanged(Resource<List<Order>> listResource) {
                 if(listResource != null){
                     switch (listResource.status){
                         case LOADING:{
-                            Log.d(TAG, "onChanged: LOADING ....");
                             break;
                         }
                         case SUCCESS:{
-                            Log.d(TAG, "onChanged: got posts ....");
                             adapter.setOrders(listResource.data);
                             if(listResource.data.size() > 0){
                                 adapter.setOrders(listResource.data);
@@ -114,7 +110,6 @@ public class OrdersFragment extends DaggerFragment implements OrdersRecyclerAdap
                             break;
                         }
                         case ERROR:{
-                            Log.e(TAG, "onChanged: ERROR .... " + listResource.message );
                             break;
                         }
                     }
@@ -133,17 +128,9 @@ public class OrdersFragment extends DaggerFragment implements OrdersRecyclerAdap
 
     @Override
     public void onOrderClick(int position, final Order order) {
-        Log.d(TAG, "onTableClick: order clicked " + order.getOrderId());
         bundle.putInt(DetailsFragment.ORDERID, order.getOrderId());
         bundle.putInt(SelectMenuFragment.TABLEID, order.getTable());
         navController.navigate(R.id.action_ordersScreen_to_orderDetailsScreen, bundle);
-    }
-
-    private void fragmentTransaction(Fragment fragment) {
-        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.nav_host_fragment, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
     }
 
     public void addNewOrder(){

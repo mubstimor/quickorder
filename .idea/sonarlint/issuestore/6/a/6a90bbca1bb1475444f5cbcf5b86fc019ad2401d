@@ -1,6 +1,5 @@
 
-Psquid:S1066"/Merge this if statement with the enclosing one.(€ˆÚÏşÿÿÿÿ8¤²ªÉ-
-bsquid:CommentedOutCodeLine-"<This block of commented-out lines of code should be removed.(¿îÓ”
-_squid:S1155">Use isEmpty() to check whether the collection is empty or not.(ö”•ùÿÿÿÿ8¤²ªÉ-
-fsquid:HiddenFieldCheck":Rename "orders" which hides the field declared at line 31.(—íË«ûÿÿÿÿ8¤²ªÉ-
-Nsquid:S1068"2Remove this unused "sessionManager" private field.(ı›’ıÿÿÿÿ
+hsquid:HiddenFieldCheck.":Rename "orders" which hides the field declared at line 27.(—íË«ûÿÿÿÿ8¤²ªÉ-
+Rsquid:S10667"/Merge this if statement with the enclosing one.(€ˆÚÏşÿÿÿÿ8¤²ªÉ-
+asquid:S11556">Use isEmpty() to check whether the collection is empty or not.(ö”•ùÿÿÿÿ8¤²ªÉ-
+]squid:UselessImportCheck"-Remove this unused import 'android.util.Log'.(Ô¦Ø²øÿÿÿÿ8¹„…ØÑ-

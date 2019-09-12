@@ -1,11 +1,11 @@
 
-jsquid:MaximumInheritanceDepth"<This class has 7 parents which is greater than 5 authorized.(’ó›Ýüÿÿÿÿ
 Csquid:S1199I"-Extract this nested code block into a method.(çéà
-=squid:S1659 "&Declare "password" on a separate line.(‡‰‹¨
-gsquid:S1301u"KReplace this "switch" statement by "if" statements to increase readability.(×“¾ñùÿÿÿÿ
 U"squid:SwitchLastCaseIsDefaultChecku""Add a default case to this switch.(×“¾ñùÿÿÿÿ
+gsquid:S1301u"KReplace this "switch" statement by "if" statements to increase readability.(×“¾ñùÿÿÿÿ
+=squid:S1659 "&Declare "password" on a separate line.(‡‰‹¨
 Isquid:S1199D"-Extract this nested code block into a method.(Šæð¾ùÿÿÿÿ
+Dsquid:S1199W"-Extract this nested code block into a method.(ƒÖ±Å
+jsquid:MaximumInheritanceDepth"<This class has 7 parents which is greater than 5 authorized.(’ó›Ýüÿÿÿÿ
+xsquid:UselessImportCheck"HRemove this unused import 'mubstimor.android.quickorder.SessionManager'.(„š™±úÿÿÿÿ8Ó‘ÉªÑ-
 Isquid:S1199v"-Extract this nested code block into a method.(Š öüøÿÿÿÿ
 Dsquid:S1199Q"-Extract this nested code block into a method.(Ö÷„”
-Dsquid:S1199W"-Extract this nested code block into a method.(ƒÖ±Å
-xsquid:UselessImportCheck"HRemove this unused import 'mubstimor.android.quickorder.SessionManager'.(„š™±úÿÿÿÿ8Ó‘ÉªÑ-
